@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<title>TikTok Clone</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<h1 class="logo">🎵 TikTok Clone</h1>
+
+<div class="feed">
+
+{% for video in videos %}
+
+<div class="video-card">
+
+<video class="video-player" loop muted controls>
+<source src="/uploads/{{ video.filename }}" type="video/mp4">
+</video>
+
+<div class="video-info">
+<h3>@usuario</h3>
+<p>{{ video.title }}</p>
+</div>
+
+<div class="actions">
+<button class="like">❤️</button>
+<button>💬</button>
+<button>↗</button>
+
+<button class="delete" onclick="deleteVideo({{video.id}})">
+🗑
+</button>
+
+</div>
+
+</div>
+
+{% endfor %}
+
+</div>
+
+<!-- Barra inferior tipo TikTok -->
+
+<div class="navbar">
+
+<span>🏠</span>
+<span>🔍</span>
+
+<a href="/upload" class="upload">
+➕
+</a>
+
+<span>📩</span>
+<span>👤</span>
+
+</div>
+
+<script src="/static/app.js"></script>
+
+</body>
+
+</html>
