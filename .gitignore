@@ -17,9 +17,10 @@ Thumbs.db
 
 # variables de entorno
 .env
-
+uploads/
 # carpeta de archivos subidos
 uploads/
 
 # opcional: cualquier archivo dentro
 uploads/*
+
