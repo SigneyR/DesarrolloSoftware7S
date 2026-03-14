@@ -14,3 +14,12 @@ __pycache__/
 # Archivos del sistema
 .DS_Store
 Thumbs.db
+
+# variables de entorno
+.env
+
+# carpeta de archivos subidos
+uploads/
+
+# opcional: cualquier archivo dentro
+uploads/*

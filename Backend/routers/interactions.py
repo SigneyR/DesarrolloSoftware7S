@@ -31,7 +31,9 @@ def listar_comentarios(video_id: str, db: Session = Depends(get_db)):
 
 @router.post("/videos/{video_id}/comments")
 def agregar_comentario(video_id: str, user_id: str, content: str, db: Session = Depends(get_db)):
-    comentario = Comment(user_id=user_id, video_id=video_id, content=content)
+    if not content or content.strip() == "":
+        raise HTTPException(status_code=400, detail="El comentario no puede estar vacío")
+    comentario = Comment(user_id=user_id, video_id=video_id, content=content.strip())
     db.add(comentario)
     db.commit()
     return {"message": "Comentario agregado"}
@@ -48,6 +50,8 @@ def eliminar_comentario(video_id: str, comment_id: str, user_id: str, db: Sessio
 # ── SEGUIR USUARIOS ────────────────────────────────
 @router.post("/users/{user_id}/follow")
 def toggle_follow(user_id: str, follower_id: str, db: Session = Depends(get_db)):
+    if user_id == follower_id:
+        raise HTTPException(status_code=400, detail="No puedes seguirte a ti mismo")
     follow = db.query(Follow).filter_by(follower_id=follower_id, following_id=user_id).first()
     if follow:
         db.delete(follow)
